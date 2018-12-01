@@ -386,17 +386,13 @@ CIUDAD = (
 	)
 
 class Cliente( models.Model ):
+    id = models.AutoField(primary_key = True)
     nombre = models.CharField( max_length = 50 )
     direccion = models.CharField ( max_length=100 )
     ciudad = models.CharField ( choices=REGIONES, max_length = 50 )
     comuna = models.CharField ( choices=CIUDAD, max_length = 50 )
     telefono = models.CharField ( max_length=9 )
     correo = models.CharField ( max_length = 50 )
-    created_date = models.DateTimeField( default=timezone.now )
-
-    def Publish( self ):
-        self.Published_date = timezone.now()
-        self.save()
 
     def __str__ ( self ):
         return self.nombre
