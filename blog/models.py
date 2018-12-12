@@ -387,11 +387,11 @@ CIUDAD = (
 
 class Cliente( models.Model ):
     id = models.AutoField(primary_key = True)
-    nombre = models.CharField( max_length = 50 )
-    direccion = models.CharField ( max_length=100 )
-    ciudad = models.CharField ( choices=REGIONES, max_length = 50 )
-    comuna = models.CharField ( choices=CIUDAD, max_length = 50 )
-    telefono = models.CharField ( max_length=9 )
+    nombre = models.CharField( max_length = 50, null=False, blank=False)
+    direccion = models.CharField ( max_length=100, null=False, blank=False )
+    ciudad = models.CharField ( choices=REGIONES, max_length = 50, null=False, blank=False )
+    comuna = models.CharField ( choices=CIUDAD, max_length = 50, null=False, blank=False )
+    telefono = models.CharField ( max_length=9, null=False, blank=False )
     correo = models.CharField ( max_length = 50 )
 
     def __str__ ( self ):
@@ -399,10 +399,10 @@ class Cliente( models.Model ):
 
 class Empleado (models.Model):
 	rut = models.CharField(primary_key = True, max_length = 50)
-	nombre = models.CharField(max_length = 400)
-	telefono = models.CharField ( max_length=9 )
+	nombre = models.CharField(max_length = 400, null=False, blank=False)
+	telefono = models.CharField ( max_length=9, null=False, blank=False )
 	correo = models.CharField(max_length=2550, blank=True)
-	cliente= models.ForeignKey(Cliente, on_delete=models.CASCADE)
+	cliente= models.ManyToManyField(Cliente)
 
 	def __str__ (self) :
 		return self.nombre
@@ -410,13 +410,13 @@ class Empleado (models.Model):
 class Orden (models.Model):
 	folio = models.AutoField(primary_key = True)
 	cliente= models.ForeignKey(Cliente, on_delete=models.CASCADE)
-	fecha = models.DateTimeField ( default = timezone.now)
-	horainicio = models.TimeField (default = timezone.now )
-	horatermino = models.TimeField (blank = False)
-	idascensor = models.CharField ( max_length = 50)
-	modelo = models.CharField ( max_length = 50 )
-	fallas = models.TextField ( max_length = 100 )
-	reparaciones= models.TextField ( max_length = 100 )
+	fecha = models.DateTimeField ( default = timezone.now, null=False, blank=False)
+	horainicio = models.TimeField (default = timezone.now, null=False, blank=False )
+	horatermino = models.TimeField ( null=False, blank=False)
+	idascensor = models.CharField ( max_length = 50, null=False, blank=False)
+	modelo = models.CharField ( max_length = 50, null=False, blank=False )
+	fallas = models.TextField ( max_length = 100, null=False, blank=False )
+	reparaciones= models.TextField ( max_length = 100, null=False, blank=False )
 	piezas= models.TextField ( max_length = 100 )
 	trabajador = models.ForeignKey ( Empleado, on_delete=models.CASCADE )
 
