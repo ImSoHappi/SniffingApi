@@ -396,3 +396,29 @@ class Cliente( models.Model ):
 
     def __str__ ( self ):
         return self.nombre
+
+class Empleado (models.Model):
+	rut = models.CharField(primary_key = True, max_length = 50)
+	nombre = models.CharField(max_length = 400)
+	telefono = models.CharField ( max_length=9 )
+	correo = models.CharField(max_length=2550, blank=True)
+	cliente= models.ForeignKey(Cliente, on_delete=models.CASCADE)
+
+	def __str__ (self) :
+		return self.nombre
+
+class Orden (models.Model):
+	folio = models.AutoField(primary_key = True)
+	cliente= models.ForeignKey(Cliente, on_delete=models.CASCADE)
+	fecha = models.DateTimeField ( default = timezone.now)
+	horainicio = models.TimeField (default = timezone.now )
+	horatermino = models.TimeField (blank = False)
+	idascensor = models.CharField ( max_length = 50)
+	modelo = models.CharField ( max_length = 50 )
+	fallas = models.TextField ( max_length = 100 )
+	reparaciones= models.TextField ( max_length = 100 )
+	piezas= models.TextField ( max_length = 100 )
+	trabajador = models.ForeignKey ( Empleado, on_delete=models.CASCADE )
+
+	def __str__ (self):
+		return self.folio
