@@ -1,7 +1,7 @@
-from .models import Cliente,Empleado,Orden
+from .models import Cliente,Empleado,Orden,Usuario
 from django.shortcuts import render
 from rest_framework import viewsets
-from blog.serializers import ClienteSerializer,EmpleadoSerializer, OrdenSerializer
+from blog.serializers import ClienteSerializer,EmpleadoSerializer, OrdenSerializer,UsuarioSerializer
 
 class ClienteViewSet( viewsets.ModelViewSet ):
     queryset = Cliente.objects.all()
@@ -14,3 +14,7 @@ class EmpleadoViewSet (viewsets.ModelViewSet):
 class OrdenViewSet (viewsets.ModelViewSet):
     queryset= Orden.objects.all()
     serializer_class= OrdenSerializer
+
+class UsuarioViewSet (viewsets.ModelViewSet):
+    queryset= Usuario.objects.all()
+    serializer_class= UsuarioSerializer

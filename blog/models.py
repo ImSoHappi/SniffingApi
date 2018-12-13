@@ -422,3 +422,10 @@ class Orden (models.Model):
 
 	def __str__ (self):
 		return self.folio
+
+class Usuario (models.Model):
+	usuario = models.CharField(primary_key =True, max_length=50 , null=False, blank=False)
+	contraseña =  models.CharField(max_length=100, null=False, blank=False)
+
+	def __str__ (self):
+		return self.usuario

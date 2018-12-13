@@ -1,4 +1,4 @@
-from .models import Cliente,Empleado,Orden
+from .models import Cliente,Empleado,Orden,Usuario
 from rest_framework import serializers
 
 class ClienteSerializer( serializers.HyperlinkedModelSerializer ):
@@ -16,3 +16,8 @@ class OrdenSerializer (serializers.HyperlinkedModelSerializer):
     class Meta:
         model= Orden
         fields= ('folio','cliente','fecha','horainicio','horatermino','idascensor','modelo','fallas','reparaciones','piezas','trabajador')
+
+class UsuarioSerializer (serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model=Usuario
+        fields= ('usuario','contraseña')
